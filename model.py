@@ -35,6 +35,22 @@ class Movie(db.Model):
 
     def __repr__(self):
         return f'<Movie movie_id={self.movie_id} title={self.title}>'
+    
+
+class Rating(db.Model):
+    """A rating."""
+
+    __tablename__ = 'ratings'
+
+    rating_id = db.Column(db.Integer,
+                        autoincrement= True,
+                        primary_key=True)
+    score = db.Column(db.Integer)     #1-5
+    movie_id = db.Column(db.Integer, db.ForeignKey("movies.movie_id"))     #foreign key related to movies table
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))        #foreign key related to users table
+
+    def __repr__(self):
+        return f'<Movie movie_id={self.movie_id} title={self.title}>'
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):
