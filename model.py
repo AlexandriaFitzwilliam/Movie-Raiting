@@ -16,6 +16,8 @@ class User(db.Model):
     email = db.Column(db.String, unique= True, nullable= False)
     password = db.Column(db.String, nullable= False)
 
+    ratings = db.relationship("Rating", back_populates="user")
+
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
     
@@ -33,6 +35,8 @@ class Movie(db.Model):
     release_date = db.Column(db.DateTime)
     poster_path = db.Column(db.String)
 
+    ratings = db.relationship("Rating", back_populates="movie")
+
     def __repr__(self):
         return f'<Movie movie_id={self.movie_id} title={self.title}>'
     
@@ -49,8 +53,11 @@ class Rating(db.Model):
     movie_id = db.Column(db.Integer, db.ForeignKey("movies.movie_id"))     #foreign key related to movies table
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))        #foreign key related to users table
 
+    movie = db.relationship("Movie", back_populates="ratings")
+    user = db.relationship("User", back_populates="ratings")
+
     def __repr__(self):
-        return f'<Movie movie_id={self.movie_id} title={self.title}>'
+        return f'<Movie rating_id={self.rating_id} movie_id={self.movie_id}>'
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):
