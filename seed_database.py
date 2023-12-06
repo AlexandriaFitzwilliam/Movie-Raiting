@@ -1,5 +1,3 @@
-Seed Database
-
 """Script to seed database."""
 
 import os
@@ -54,3 +52,30 @@ for movie in movie_data:
 
 model.db.session.add_all(movies_in_db)
 model.db.session.commit()
+
+
+ratings_in_db = []
+
+for n in range(10):
+    email = f'user{n}@test.com'  # Voila! A unique email!
+    password = 'test'
+
+    user = crud.create_user(email,password)
+    model.db.session.add(user)
+
+    # TODO: create 10 ratings for the user
+
+    for r in range(10):
+        random_movie = choice(movies_in_db)
+        score = randint(1,5)
+
+        rating = crud.create_rating(score, random_movie.movie_id, user.user_id)
+        ratings_in_db.append(rating)
+
+model.db.session.add_all(ratings_in_db) 
+
+model.db.session.commit()
+
+
+
+  
