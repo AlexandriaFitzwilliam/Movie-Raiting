@@ -22,9 +22,9 @@ def homepage():
 def show_all_movies():
     """View all movies."""
 
-    all_movies = crud.get_movies()
+    movies = crud.get_movies()
 
-    return render_template('all_movies.html', movies=all_movies)
+    return render_template('all_movies.html', movies=movies)
 
 if __name__ == "__main__":
     connect_to_db(app)
