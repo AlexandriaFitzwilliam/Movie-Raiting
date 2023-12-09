@@ -35,6 +35,7 @@ def show_movie(movie_id):
 
     return render_template("movie_details.html", movie=movie)
 
+
 @app.route('/users')
 def show_all_users():
     """View all users."""
@@ -58,6 +59,27 @@ def create_users():
         db.session.add(new_user)
         db.session.commit()
         flash("Your account was successfully made. You can now log in.")
+
+    return redirect("/")
+
+
+@app.route('/login', methods=["POST"])
+def login_users():
+    """Login users."""
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
+
+    if user and user.password == password:
+        flash("You were successfully logged in.")
+
+    elif user and user.password != password:
+        flash("Your email and password do not match")
+
+    else:
+        flash("This user does not exist.")
 
     return redirect("/")
 
