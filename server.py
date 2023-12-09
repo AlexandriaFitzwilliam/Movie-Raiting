@@ -43,6 +43,11 @@ def show_all_users():
 
     return render_template('all_users.html', users=users)
 
+@app.route('/users', methods=["POST"])
+def create_users():
+    """Create users."""
+
+
 
 @app.route("/user/<user_id>")
 def show_user(user_id):
