@@ -31,9 +31,50 @@ def show_all_movies():
 def show_movie(movie_id):
     """Show details on a particular movie."""
 
+    print("**********************************")
+    print(f'movie_id = {movie_id}')
+    print("*********************************")
     movie = crud.get_movie_by_id(movie_id)
 
+
     return render_template("movie_details.html", movie=movie)
+
+#@app.route("/movie/<movie_id>/add_rating", #method=['POST']#)
+@app.route("/add_rating/<movie_id>")
+def rate_movie(movie_id):
+    """Add a movie rating."""
+
+    print()
+    print()
+    print("**********************************")
+    print(f'movie_id = {movie_id}')
+    print("*********************************")
+    print()
+    print()
+
+    score = request.form.get('#rating-select')
+    print()
+    print()
+    print("**********************************")
+    print(f'score = {score}')
+    print("*********************************")
+    print()
+    print()
+
+    rating = crud.get_rating_by_user(session['user'], movie_id)
+
+    # #if the user is logged in and they have not rated this movie yet
+    # if session['user']:
+    #     pass
+    # #if the user is logged in but already left a rating
+
+    # #if there is not a user logged in
+    #if user not in session:
+     #   flash("You must be logged in to rate a movie.")
+      #  return redirect("/login_users")
+        
+
+    return redirect("/movies")
 
 
 @app.route('/users')

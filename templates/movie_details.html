@@ -14,10 +14,10 @@
 
 <h2>Rate This Movie</h2>
 
-<form>
-  <label for="raiting-select">Choose a rating:</label>
+<form action="/add_rating/{{ movie.movie_id }}">
+  <label for="rating-select">Choose a rating:</label>
 
-  <select name="raiting" id="raiting-select">
+  <select name="rating" id="rating-select">
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -25,7 +25,7 @@
     <option value="5">5</option>
   </select>
 
-  <button type="submit">Submit Rating</button
+  <button type="submit">Submit Rating</button>
 </form>
 
 
