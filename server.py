@@ -73,11 +73,10 @@ def login_users():
     user = crud.get_user_by_email(email)
 
     if user and user.password == password:
+        session['user'] = user.user_id
         flash("You were successfully logged in.")
-
     elif user and user.password != password:
         flash("Your email and password do not match")
-
     else:
         flash("This user does not exist.")
 
